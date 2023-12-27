@@ -27,8 +27,7 @@ export default function GeographicalObjectCard({geographical_object, setUpdateTr
     const get_photo = async () => {
         // Получаем ID географического объекта
         const geographicalObjectId = geographical_object?.id;
-        if (geographicalObjectId === undefined || geographicalObjectId === null) {
-            console.error('ID географического объекта не определено.');
+        if (geographicalObjectId === undefined || geographicalObjectId === null || geographicalObjectId === -1) {
             return;
         }
         const api = new GeographicalObjectApi();
@@ -44,7 +43,7 @@ export default function GeographicalObjectCard({geographical_object, setUpdateTr
                 setPhotoUrl(mockImage);
             }
         } catch (error) {
-            console.error('Error fetching image:', error);
+            // console.error('Error fetching image:', error);
             setPhotoUrl(mockImage);
         }
     };
@@ -100,18 +99,13 @@ export default function GeographicalObjectCard({geographical_object, setUpdateTr
                     />
                 </div>
                 <div className="card-content">
-                    {is_moderator && (
-                        <div className="content-top">
-                            <h3>ID: {geographical_object.id}</h3>
-                        </div>
-                    )}
                     <div className="content-top">
                         <h3 className="title">{geographical_object.feature}</h3>
                     </div>
                 </div>
             </Link>
             <div className="card-content">
-                {!is_moderator && is_authenticated && (
+                {is_authenticated && (
                     <div style={{textAlign: 'center', marginTop: '0px', zIndex: '1'}}>
                         <Button variant="contained"
                                 color="secondary"
@@ -120,28 +114,6 @@ export default function GeographicalObjectCard({geographical_object, setUpdateTr
                             Добавить в полет
                         </Button>
                     </div>
-                )}
-                {is_moderator && (
-                    <>
-                        <div style={{textAlign: 'center', marginTop: '0px', zIndex: '1'}}>
-                            <Button variant="contained"
-                                    color="secondary"
-                                    onClick={deleteGeographicalObject}
-                            >
-                                Удалить
-                            </Button>
-                        </div>
-                        <Link to={`/geographical_object/${geographical_object.id}/edit/`}
-                              style={{textDecoration: 'none', color: 'inherit'}}>
-                            <div style={{textAlign: 'center', marginTop: '0px', zIndex: '1'}}>
-                                <Button variant="contained"
-                                        color="info"
-                                >
-                                    Редактировать
-                                </Button>
-                            </div>
-                        </Link>
-                    </>
                 )}
             </div>
         </div>

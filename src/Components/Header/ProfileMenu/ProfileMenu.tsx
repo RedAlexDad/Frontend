@@ -132,8 +132,7 @@ export default function ProfileMenu() {
                     <Link to="/mars_station/" className="menu-item" style={{textDecoration: 'none'}}>
                         <span className="item">Марсианские станции</span>
                     </Link>
-                    {!is_moderator &&
-                        <BasketBadges/>}
+                    <BasketBadges/>
                     <UserInfo/>
                 </div>
                 <Hamburger isOpen={isOpen} setIsOpen={setIsOpen}/>

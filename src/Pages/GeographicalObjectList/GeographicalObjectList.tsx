@@ -10,12 +10,9 @@ import {RootState} from "../../store/store.ts";
 import Pagination from "../../Components/Header/Pagination/Pagination.tsx";
 import LoadingAnimation from "../../Components/Loading.tsx";
 import {ApiGeographicalObjectGetRequest, GeographicalObjectApi} from "../../../swagger/generated-code";
-// import GeographicalObjectCardAdd from "./GeographicalObjectCard/GeographicalObjectCardAdd.tsx";
-// import {useAuth} from "../../hooks/useAuth.ts";
 
 export default function GeographicalObjectListPage() {
     const {access_token} = useToken()
-    // const {is_moderator} = useAuth()
 
     const dispatch = useDispatch()
     const GeographicalObject = useSelector((state: RootState) => state.geographical_object.data);
@@ -105,14 +102,9 @@ export default function GeographicalObjectListPage() {
         <div className="cards-list-wrapper">
             {loading && <LoadingAnimation isLoading={loading}/>}
             <div className="top">
-                <SearchBar
-                    feature={feature}
-                />
+                <SearchBar/>
             </div>
             <div className="bottom">
-                {/*{is_moderator &&*/}
-                {/*    <GeographicalObjectCardAdd/>*/}
-                {/*}*/}
                 {cards}
             </div>
             {count > 0 && totalPages > 1 && (
